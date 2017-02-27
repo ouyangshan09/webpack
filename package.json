@@ -1,0 +1,24 @@
+{
+  "name": "oys-cli-template-webpack",
+  "version": "1.0.0",
+  "description": "person technology stack template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouyangshan09/webpack.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Ouyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ouyangshan09/webpack/issues"
+  },
+  "homepage": "https://github.com/ouyangshan09/webpack#readme",
+  "devDependencies": {
+
+  }
+}
