@@ -7,5 +7,5 @@
     "build": ""
   },
   "author": "{{ author }}",
-  "license": "ISC",
+  "license": "ISC"
 }
