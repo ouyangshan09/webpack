@@ -1,6 +1,7 @@
 #git上传时 过滤文件夹名称
 node_modules/
 dist/
-test/
+test/unit/
+test/e2e/
 #git上传时，过滤文件名
 npm-debug.log
