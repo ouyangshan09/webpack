@@ -1,6 +1,7 @@
 /**
  * Created by OUYANG on 2017/2/27.
  */
+var chalk = require('chalk');
 var path = require('path');
 var config = require('../config');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -57,9 +58,8 @@ exports.styleLoaders = function (options) {
     var loaders = exports.cssLoaders(options);
     for(var extension in loaders){
         var loader = loaders[extension];
-        var testName = new RegExp('\\.' + extension + '$');
         output.push({
-            test: testName,
+            test: new RegExp('\\.' + extension + '$'),
             use: loader
         });
     }

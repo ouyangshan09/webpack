@@ -14,9 +14,6 @@ var baseWebpackConfig = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FriendlyErrorPlugin = require('friendly-errors-webpack-plugin');
 
-utils.styleLoaders({sourceMap: config.dev.cssSourceMap});
-
-
 module.exports = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})

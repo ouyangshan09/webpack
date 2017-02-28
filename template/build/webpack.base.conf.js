@@ -3,8 +3,9 @@
  */
 
 var path = require('path');
+var utils = require('./utils');
 var config = require('../config');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var vueLoaderConfig = require('./vue-loader.conf');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -24,7 +25,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            'vue': 'vue/dist/vue.esm.js'
+            'vue$': resolve('node_modules/vue/dist/vue.esm.js'),
+            '@': resolve('src')
         }
     },
     module: {
@@ -36,15 +38,19 @@ module.exports = {
                 include: [resolve('src')]
             },{
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: vueLoaderConfig
             },{
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                query: {
+                    name: utils.assetsPath('img/[name].[ext]?[hash]')
+                }
             },{
                 test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
                 loader: 'file-loader',
                 query: {
-                    name: '[name].[ext]?[hash]'
+                    name: utils.assetsPath('img/[name].[ext]?[hash]')
                 }
             }
         ]

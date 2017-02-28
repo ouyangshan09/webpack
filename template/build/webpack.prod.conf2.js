@@ -46,7 +46,6 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         new ExtractTextPlugin({
             filename: utils.assetsPath('css/[name].[contenthash].css'),
-            allChunks: true
         }),
         new HtmlWebpackPlugin({
             filename: config.build.index,
@@ -57,9 +56,10 @@ var webpackConfig = merge(baseWebpackConfig, {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true,
             },
-            title: '欧阳个人',
+            chunksSortMode: 'dependency',
+            title: '个人技术栈',
         }),
-        new OptimizeCSSPlugin(),
+        // new OptimizeCSSPlugin(),
         new CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function (module, count) {
@@ -92,6 +92,7 @@ if(config.build.productionGzip){
     );
 }
 if(config.build.bundleAnalyzerReport){
-    console.log('bundleAnalyzerReport');
+
+    console.log('bundleAnalyzerReport: ', config.build.bundleAnalyzerReport);
 }
 module.exports = webpackConfig;
