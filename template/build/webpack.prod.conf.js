@@ -1,22 +1,22 @@
 /**
  * Created by OUYANG on 2017/2/27.
- * 正式环境编译配置
  */
-process.env.NODE_ENV = 'production';
-
-var utils = require('./utils');
 var path = require('path');
+var utils = require('./utils');
 var webpack = require('webpack');
 var config = require('../config');
 var merge = require('webpack-merge');
 var baseWebpackConfig = require('./webpack.base.conf');
-
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+var DllReferencePlugin = require("webpack/lib/DllReferencePlugin");
+
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 var env = config.build.env;
 
@@ -27,11 +27,11 @@ var webpackConfig = merge(baseWebpackConfig, {
             extract: true
         })
     },
-    devetool: config.build.productionSourceMap ? '#source-map' : false,
+    devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
         path: config.build.assetsRoot,
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[id].[chunkhash].js'
+        filename: utils.assetsPath('js/[name].[chunkhash].js'),
+        chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
     },
     plugins: [
         new DefinePlugin({
@@ -47,15 +47,62 @@ var webpackConfig = merge(baseWebpackConfig, {
             }
         }),
         new ExtractTextPlugin({
-            filename: '[name].[contenthash].css',
-            allChunks: true
+            filename: utils.assetsPath('css/[name].[contenthash].css'),
         }),
         new HtmlWebpackPlugin({
             filename: config.build.index,
             template: 'index.html',
             inject: true,
-            title: "个人",
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true,
+            },
+            chunksSortMode: 'dependency',
+            title: '个人技术栈',
         }),
+        new DllReferencePlugin({
+            context: config.build.assetsLib,
+            manifest: config.build.assetsLib + '/manifest.json'
+        }),
+        new AddAssetHtmlPlugin({
+            filepath: require.resolve('../lib/lib.js'),
+            includeSourcemap: false
+        }),
+        // new OptimizeCSSPlugin(),
+        // new CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     minChunks: function (module, count) {
+        //         return (module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0);
+        //     }
+        // }),
+        // new CommonsChunkPlugin({
+        //     name: 'manifest',
+        //     chunks: ['vendor']
+        // }),
+        new CopyWebpackPlugin([{
+            form: path.resolve(__dirname, '../static'),
+            to: config.build.assetsSubDirectory,
+            ignore: ['.*']
+        }]),
     ]
 });
+
+if(config.build.productionGzip){
+    var CompressionWebpackPlugin = require('compression-webpack-plugin');
+
+    webpackConfig.plugins.push(
+        new CompressionWebpackPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp('\\.(' + config.build.productionGzipExtensions.join('|') + ')$'),
+            threshold: 10240,
+            minRatio: 0.8
+        })
+    );
+}
+if(config.build.bundleAnalyzerReport){
+
+    console.log('bundleAnalyzerReport: ', config.build.bundleAnalyzerReport);
+}
 module.exports = webpackConfig;

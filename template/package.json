@@ -4,11 +4,13 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js"
   },
   "author": "Ouyang",
   "license": "ISC",
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^1.0.2",
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",

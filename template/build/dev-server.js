@@ -11,7 +11,7 @@ var express= require('express');
 var webpack = require('webpack');
 var proxyMiddleware = require('http-proxy-middleware');
 var webpackConfig = process.env.NODE_ENV === 'testing'
-    ? require('./webpack.prod.conf2.js')
+    ? require('./webpack.prod.conf.js')
     : require('./webpack.dev.conf');
 
 var port = process.env.PORT || config.dev.port;

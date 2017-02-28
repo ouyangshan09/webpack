@@ -1,9 +1,8 @@
 /**
  * Created by OUYANG on 2017/2/27.
- * 编译脚本
+ * 编译->发布脚本
  * @file dist folder
  */
-require('./check-versions')();
 
 process.env.NODE_ENV = 'production';
 
@@ -13,7 +12,7 @@ var chalk = require('chalk');
 var path = require('path');
 var webpack = require('webpack');
 var config = require('../config');
-var webpackConfig = require('./webpack.prod.conf2.js');
+var webpackConfig = require('./webpack.prod.conf.js');
 
 var spinner = ora('building for production...');
 spinner.start();
@@ -33,10 +32,10 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
                 chunks: false,
                 chunkModules: false
             }) + '\n\n');
-        console.log(chalk.cyan('  Build complete.\n'));
+        console.log(chalk.cyan('  编译完成.\n'));
         console.log(chalk.yellow(
-            '  Tip: built files are meant to be served over an HTTP server.\n' +
-            '  Opening index.html over file:// won\'t work.\n'
+            '  Tip: 通过静态服务器访问index.html 可看到效果.\n' +
+            '  例如使用Nginx服务器,注意文件结构'
         ));
     });
 });

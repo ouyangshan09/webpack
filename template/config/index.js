@@ -3,13 +3,18 @@
  */
 var path = require('path');
 
+function resolve(_path) {
+    return path.join(__dirname, '..', _path);
+}
+
 module.exports = {
     build: {
         env: require('./prod.env'),
-        index: path.resolve(__dirname, '../dist/index.html'),
-        assetsRoot: path.resolve(__dirname, '../dist'),
+        index: resolve('dist/index.html'),
+        assetsRoot: resolve('dist'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
+        assetsLib: resolve('lib'),
         productionSourceMap: true,
         productionGzip: false,
         productionGzipExtensions: ['js', 'css'],
