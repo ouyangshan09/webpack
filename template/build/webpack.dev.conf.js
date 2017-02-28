@@ -7,11 +7,13 @@ var webpack = require('webpack');
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 var NoEmitOnErrorsPlugin = require('webpack/lib/NoEmitOnErrorsPlugin');
+var DllReferencePlugin = require("webpack/lib/DllReferencePlugin");
 var merge = require('webpack-merge');
 var config = require('../config');
 var utils = require('./utils');
 var baseWebpackConfig = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 var FriendlyErrorPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(baseWebpackConfig, {
@@ -36,6 +38,14 @@ module.exports = merge(baseWebpackConfig, {
             template: 'index.html',
             inject: true
         }),
-        new FriendlyErrorPlugin()
+        new FriendlyErrorPlugin(),
+        new DllReferencePlugin({
+            context: config.build.assetsLib,
+            manifest: config.build.assetsLib + '/manifest.json'
+        }),
+        new AddAssetHtmlPlugin({
+            filepath: require.resolve('../lib/lib.js'),
+            includeSourcemap: false
+        })
     ],
 });
