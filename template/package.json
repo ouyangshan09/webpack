@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
     "build": "node build/build.js",
-    "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js"
+    "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
+    "bundle2": "node build/dll-bundle.js"
   },
   "author": "Ouyang",
   "license": "ISC",
