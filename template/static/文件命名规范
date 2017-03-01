@@ -1,0 +1,14 @@
+Component组件命名规范:
+
+JavaScript命名规范
+table.component.js
+
+ memo.type.js
+
+
+memo: 文件用途,大小写通过 "-" 隔离, 所有命名统一使用小写
+type: 类型,component/formatter/util/method/computed/...
+
+
+
+

@@ -1,0 +1,18 @@
+前端工程师 项目功能调试代码中console.log()接口应用 总共分为6个级别，规范如下:
+
+说明              颜色级别                应用场景
+
+1、VERSION       #BBBBBB(xxx)
+2、DEBUG         #0070BB(xxx)                  输出参数,用于查看程序传参
+3、INFO          #48BB31(xxx)                  输出信息,用于查看程序流程
+4、WARN          #BBBB23(黄色)                  警告,不影响整体程序
+5、ERROR         #FF0006(红色)                  错误,影响整体程序流程
+6、ASSERT        #8F0005(xxx)
+
+栗子: console.log(`%c queryURL: `, `color: #0070BB`);
+
+应用颜色的接口为 console.log(`%c xxx ${xxx}`, 'color: #xxx');
+
+以上是基本类型的应用，如遇到对象或者数组类型，应当使用以下方法
+
+console.table(object or array);
