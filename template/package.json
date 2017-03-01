@@ -1,14 +1,14 @@
 {
   "name": "webpackTemplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "{{ description }}",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js"
   },
-  "author": "Ouyang",
+  "author": "{{ author }}",
   "license": "ISC",
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^1.0.2",
