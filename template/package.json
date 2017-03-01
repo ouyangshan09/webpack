@@ -4,6 +4,7 @@
   "description": "{{ description }}",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
+    "dev2": "node build/dev-server.js",
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js"
