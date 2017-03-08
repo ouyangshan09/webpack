@@ -22,7 +22,6 @@ exports.cssLoaders = function (options) {
             sourceMap: options.sourceMap
         }
     };
-
     //生成loader
     function generateLoaders(loader, loaderOptions) {
         var loaders = [cssLoader];
