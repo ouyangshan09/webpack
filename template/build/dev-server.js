@@ -1,10 +1,10 @@
 /**
  * Created by OUYANG on 2017/2/27.
  */
-var config = require('../config');
 if(!process.env.NODE_ENV){
     process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 }
+var config = require('../config');
 var path = require('path');
 var opn = require('opn');
 var express= require('express');
@@ -22,7 +22,7 @@ var app = express();
 var compiler = webpack(webpackConfig);
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-    publicPath: null,
+    publicPath: webpackConfig.output.publicPath,
     quiet: true
 });
 
@@ -45,12 +45,9 @@ Object.keys(proxyTable).forEach(function (ctx) {
     app.use(proxyMiddleware(options.filter || ctx, options));
 });
 
-app.use(require('connect-history-api-fallback'));
-
+app.use(require('connect-history-api-fallback')());
 app.use(devMiddleware);
-
 app.use(hotMiddleware);
-
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
 app.use(staticPath, express.static('./static'));
 
@@ -68,5 +65,4 @@ module.exports = app.listen(port, function (err) {
     if(autoOpenBrowser && process.env.NODE_ENV !== 'testing'){
         opn(uri);
     }
-
 });
